@@ -1,0 +1,27 @@
+class Solution 
+{
+    public int pivotIndex(int[] nums) 
+    {
+        if (nums.length == 0)   // If array is empty
+            return -1;          // Return -1
+        
+        int indeces = nums.length;  // store total number of indeces to make searching easier
+        int sum = 0, leftsum = 0;   // instantiate variables for total and sum to the left of an index 
+        
+        
+        for (int x: nums) sum += x; // Add all values in array to get sum
+        
+        for(int i = 0; i < indeces; i++)    // Iterate through array
+        {
+            if(leftsum == (sum - nums[i]))  // If the leftsum is equivalent to the right sum
+                return i;                   // Return the Index
+            else                                // Otherwise Index was not found
+            {
+                leftsum += nums[i];         // add the value of the current index to the leftsum
+                sum -= nums[i];             // subtract value of current index from total sum
+            }
+        }
+        // loop above adds to the leftsum and subtracts from the total sum looking for a point where both variables equal one another
+        return -1;      // If all checks do not pass return -1 (*No proper index found)
+    }
+}

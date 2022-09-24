@@ -1,0 +1,15 @@
+class Solution 
+{
+    public int[] runningSum(int[] nums) 
+    {
+        int[] results = new int[nums.length];   // *Create an empty array to store the results of mathematical operations being done from elements in the nums array
+        
+        results[0] = nums[0];    // First element of the results array will be the same as the array we want to check
+        
+        for (int i = 1; i < nums.length; i++)  // Loop through all elements of the nums array (Starting at the second element)
+        {
+            results[i] = results[i - 1] + nums[i]; // Add the current index of nums with that of the total value of previous elements stored in results
+        }
+        return results;
+    }
+}
