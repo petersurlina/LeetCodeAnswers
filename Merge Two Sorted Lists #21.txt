@@ -1,0 +1,44 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        
+        ListNode temp = new ListNode(0);            // Temporary Linked List head node to fill with values from list1 and list2
+        ListNode mergedHead = temp;                 // Finalized Linked List that copies the entirty of the temporary L.L.
+        
+        while(list1 != null && list2 != null) {     // Loop through list1 and list2 as long as they both have elements
+            if(list1.val < list2.val) {                 // If the current node in list1 is less than the node in list2
+                temp.next = list1;                          // Set the temporary list's next node to the current node value of list1 
+                list1 = list1.next;                         // Iterate to the next node in list1
+            }
+            else {                                      // If the current node in list1 is greater than the node in list2
+                temp.next = list2;                          // Set the temporary list's next node to the current node value of list2
+                list2 = list2.next;                         // Iterate to the next node in list2
+            }            
+            temp = temp.next;                           // Iterate through the temporary linked list
+        }
+        
+        // Only one of the below cases should occur after exiting our loop
+        
+        if (list1 != null) {                        // If list1 still has nodes
+            temp.next = list1;                          // Append the entirity of list1 to the end of the temporary L.L.
+        }
+        else{                                       // If list2 still has nodes
+            temp.next = list2;                          // Append the entirity of list2 to the end of the temporary L.L.
+        }
+        
+        return mergedHead.next;                     // Return the merged linked list (*We use .next here to get rid of the 0 we had to use in initialization of the temp L.L.)
+        
+        // Big-O Time Complexity: O(n) since we iterate through the whole list our speed will be determined proportionally to the input size of the list
+        
+        // Big-O Space Complexity: O(1) we do not need to allocate more memory within our method since we only store one occurence of the head node of the merged list 
+    }
+}

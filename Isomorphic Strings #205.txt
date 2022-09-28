@@ -1,0 +1,25 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        if(s.length() != t.length()) {                  // Strings are not equal length so they cannot be isomorphic
+            return false;
+        }
+        
+        // Instantiate two HashMaps to check that isomorphic rules are followed in this scenario (dealing with char to char mapping so we utilize <Character, Character>)
+        HashMap<Character, Character> ST = new HashMap<>();     // Keep Track of all characters in String S being mapped to another character in String T
+        HashMap<Character, Character> TS = new HashMap<>();     // Keep Track of all characters in String T being mapped to another character in String S
+        
+        for (int i = 0; i < s.length(); i++) {       // Just iterate through one string since both are equal sizes in any isomorphic situation
+            char a = s.charAt(i);                    // Collect the char at the current index of both strings
+            char b = t.charAt(i);
+            
+            // Check if the current char is a key in the map, and if so check that the respective value stored with it isn't different from what was already assigned (*If different then the strings are not isomorphic) 
+            if (ST.containsKey(a) &&  ST.get(a) != b || TS.containsKey(b) &&  TS.get(b) != a) { 
+                return false;
+            }
+            
+            ST.put(a,b);    // Put char a as a key in our first map with b being its respective value
+            TS.put(b,a);    // Put char b as a key in our second map with a being its respective value
+        }
+        return true;    // If we iterate through both strings and we pass all the checks then we have isomorphic strings
+    }
+}

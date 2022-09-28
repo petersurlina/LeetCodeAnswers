@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int count = 0;                                  // Instanciate variable to control how we maneuver the first string's position        
+        
+        if (s.length() > t.length())                    // There are more characters to look for in string s than can exist in string t
+            return false;
+        
+        if (s.length() == 0)                            // There are no characters in string s, so any string t can be true
+            return true;
+           
+        for (int i = 0; i < t.length(); i++) {          // Iterate second string
+            if(s.charAt(count) == t.charAt(i)) {            // Compare strings to check for a match
+                count++;                                        // If match found iterate the first string to the next character and keep checking for matching characters
+            }
+            if(count == s.length())                             // If at any point in the search we found all of the characters of string s return true
+                return true;
+        }
+        
+        return false;                                   // If we reach the end and we didn't find all of the characters in string s then return false
+    }
+}
